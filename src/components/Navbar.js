@@ -1,7 +1,16 @@
 import Routes from '../Routes';
 
 const Navbar = () => (
-  <Routes />
+  <ul>
+    <li>
+      <a href="/habits">Habits</a>
+    </li>
+    <li>
+      <a href="/habits/create">Add habit</a>
+    </li>
+    <Routes />
+  </ul>
+
 );
 
 export default Navbar;
