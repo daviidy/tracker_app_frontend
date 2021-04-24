@@ -15,7 +15,7 @@ const enableDevTools = NODE_ENV === 'development'
 export default createStore(
   combineReducers,
   {
-    user: userState,
+    users: userState,
   },
   enableDevTools,
 );

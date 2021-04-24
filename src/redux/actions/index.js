@@ -29,10 +29,9 @@ export const signUpPending = () => ({
   type: SIGN_UP_PENDING,
 });
 
-export const signUpSuccess = (habits, filter) => ({
+export const signUpSuccess = (user) => ({
   type: SIGN_UP_SUCCESS,
-  habits,
-  filter,
+  user,
 });
 
 export const signUpError = (error) => ({
@@ -44,10 +43,9 @@ export const signInPending = () => ({
   type: SIGN_IN_PENDING,
 });
 
-export const signInSuccess = (habits, filter) => ({
+export const signInSuccess = (token) => ({
   type: SIGN_IN_SUCCESS,
-  habits,
-  filter,
+  token,
 });
 
 export const signInError = (error) => ({

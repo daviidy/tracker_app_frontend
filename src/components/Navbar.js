@@ -8,6 +8,12 @@ const Navbar = () => (
     <li>
       <a href="/habits/create">Add habit</a>
     </li>
+    <li>
+      <a href="/users/sign_up">Sign Up</a>
+    </li>
+    <li>
+      <a href="/users/sign_in">Sign In</a>
+    </li>
     <Routes />
   </ul>
 
