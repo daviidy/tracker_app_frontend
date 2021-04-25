@@ -5,6 +5,9 @@ import {
   SIGN_IN_PENDING,
   SIGN_IN_SUCCESS,
   SIGN_IN_ERROR,
+  GET_USER_PENDING,
+  GET_USER_SUCCESS,
+  GET_USER_ERROR,
 } from '../actions/actionsTypes';
 
 export const userState = {
@@ -50,6 +53,26 @@ const users = (state = userState, action) => {
       };
 
     case SIGN_IN_ERROR:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
+
+    case GET_USER_PENDING:
+      return {
+        ...state,
+        pending: true,
+      };
+
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        user: action.user,
+      };
+
+    case GET_USER_ERROR:
       return {
         ...state,
         pending: false,

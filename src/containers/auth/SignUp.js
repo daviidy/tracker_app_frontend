@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import {
   getToken, getUser, getUserError, getUserPending,
 } from '../../redux/reducers/usersReducer';
 import signInAction from '../../modules/signIn';
+import { checkUser } from '../../modules/checkAuth';
 
 const SignUp = ({
   signUp,
@@ -26,6 +27,12 @@ const SignUp = ({
   });
 
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    if (checkUser()) {
+      setRedirect(true);
+    }
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();

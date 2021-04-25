@@ -14,8 +14,10 @@ const signUp = (data) => async (dispatch) => {
       });
     const second = await first.json();
     dispatch(signUpSuccess(second));
+    localStorage.setItem('id', second.id);
     localStorage.setItem('username', second.username);
     localStorage.setItem('email', second.email);
+    localStorage.setItem('admin', second.admin);
     second.password = data.password;
     return second;
   } catch (error) {

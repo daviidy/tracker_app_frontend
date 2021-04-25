@@ -5,6 +5,7 @@ import Habits from './containers/Habits';
 import AddHabit from './containers/AddHabit';
 import SignUp from './containers/auth/SignUp';
 import SignIn from './containers/auth/SignIn';
+import SingleHabit from './containers/SingleHabit';
 
 const Routes = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = () => (
       <Route exact path="/habits/create" component={AddHabit} />
       <Route exact path="/users/sign_up" component={SignUp} />
       <Route exact path="/users/sign_in" component={SignIn} />
+      <Route exact path="/habits/:id" component={SingleHabit} />
     </Switch>
   </BrowserRouter>
 );
