@@ -5,11 +5,18 @@ import {
   ADD_HABIT_PENDING,
   ADD_HABIT_SUCCESS,
   ADD_HABIT_ERROR,
+  UPDATE_HABIT_PENDING,
+  UPDATE_HABIT_SUCCESS,
+  UPDATE_HABIT_ERROR,
+  SINGLE_HABIT_PENDING,
+  SINGLE_HABIT_SUCCESS,
+  SINGLE_HABIT_ERROR,
 } from '../actions/actionsTypes';
 
 export const habitsState = {
   pending: false,
   habits: [],
+  singleHabit: {},
   error: null,
 };
 
@@ -54,12 +61,52 @@ const habits = (state = habitsState, action) => {
         error: action.error,
       };
 
+    case SINGLE_HABIT_PENDING:
+      return {
+        ...state,
+        pending: true,
+      };
+
+    case SINGLE_HABIT_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        singleHabit: action.habit,
+      };
+
+    case SINGLE_HABIT_ERROR:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
+
+    case UPDATE_HABIT_PENDING:
+      return {
+        ...state,
+        pending: true,
+      };
+
+    case UPDATE_HABIT_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+      };
+
+    case UPDATE_HABIT_ERROR:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
+
     default:
       return state;
   }
 };
 
 export const getHabits = (state) => state.habits.habits;
+export const getHabit = (state) => state.habits.singleHabit;
 export const getHabitsPending = (state) => state.habits.pending;
 export const getHabitsError = (state) => state.habits.error;
 export default habits;

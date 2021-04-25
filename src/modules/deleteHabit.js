@@ -1,9 +1,11 @@
-import { singleHabitError, singleHabitPending, singleHabitSuccess } from '../redux/actions';
+import {
+  deleteHabitError, deleteHabitPending, deleteHabitSuccess,
+} from '../redux/actions';
 
-const fetchSingleHabit = (token, data) => async (dispatch) => {
+const deleteHabit = (token, data) => async (dispatch) => {
   console.log(data);
   console.log(token);
-  dispatch(singleHabitPending());
+  dispatch(deleteHabitPending());
   try {
     const first = await fetch(`https://tracker-back-mcv.herokuapp.com/habits/${data}`,
       {
@@ -12,16 +14,15 @@ const fetchSingleHabit = (token, data) => async (dispatch) => {
           Authorization: `Bearer ${token}`,
         },
         mode: 'cors',
-        method: 'GET',
+        method: 'DELETE',
       });
     const second = await first.json();
-    console.log(second);
-    dispatch(singleHabitSuccess(second));
+    dispatch(deleteHabitSuccess(second));
     return second;
   } catch (error) {
-    dispatch(singleHabitError(error));
+    dispatch(deleteHabitError(error));
     return error;
   }
 };
 
-export default fetchSingleHabit;
+export default deleteHabit;
