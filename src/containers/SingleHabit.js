@@ -71,6 +71,11 @@ const SingleHabit = (props) => {
           <a href={`/habits/${habit.id}/edit`}>Edit</a>
           <br />
           <button type="button" onClick={handleDelete}>Delete</button>
+          <br />
+          <a href={`/habits/${habit.id}/measurements/create`}>Add measure for this habit</a>
+          <br />
+          <a href={`/habits/${habit.id}/measurements`}>All measures for this habit</a>
+          <br />
         </>
       )
   );

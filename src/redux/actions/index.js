@@ -114,9 +114,9 @@ export const fetchMeasurePending = () => ({
   type: FETCH_MEASURE_PENDING,
 });
 
-export const fetchMeasureSuccess = (habits) => ({
+export const fetchMeasureSuccess = (measures) => ({
   type: FETCH_MEASURE_SUCCESS,
-  habits,
+  measures,
 });
 
 export const fetchMeasureError = (error) => ({
@@ -141,9 +141,9 @@ export const singleMeasurePending = () => ({
   type: SINGLE_MEASURE_PENDING,
 });
 
-export const singleMeasureSuccess = (habit) => ({
+export const singleMeasureSuccess = (measure) => ({
   type: SINGLE_MEASURE_SUCCESS,
-  habit,
+  measure,
 });
 
 export const singleMeasureError = (error) => ({

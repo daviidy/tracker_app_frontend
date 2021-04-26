@@ -7,6 +7,8 @@ import SignUp from './containers/auth/SignUp';
 import SignIn from './containers/auth/SignIn';
 import SingleHabit from './containers/SingleHabit';
 import UpdateHabit from './containers/UpdateHabit';
+import AddMeasure from './containers/AddMeasure';
+import Measurements from './containers/Measurements';
 
 const Routes = () => (
   <BrowserRouter>
@@ -18,6 +20,8 @@ const Routes = () => (
       <Route exact path="/users/sign_in" component={SignIn} />
       <Route exact path="/habits/:id" component={SingleHabit} />
       <Route exact path="/habits/:id/edit" component={UpdateHabit} />
+      <Route exact path="/habits/:id/measurements/create" component={AddMeasure} />
+      <Route exact path="/habits/:id/measurements" component={Measurements} />
     </Switch>
   </BrowserRouter>
 );
