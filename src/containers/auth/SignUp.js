@@ -44,9 +44,7 @@ const SignUp = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (user.password !== user.passwordConfirmation) {
-      alert("Passwords don't match");
-    } else {
+    if (user.password === user.passwordConfirmation) {
       signUp(user).then((data) => {
         const info = {
           email: data.email,
@@ -57,6 +55,7 @@ const SignUp = ({
         });
       });
     }
+    return null;
   };
 
   const shouldShowSpinner = () => {

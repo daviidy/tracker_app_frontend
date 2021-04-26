@@ -41,7 +41,6 @@ const SingleHabit = (props) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log(habit);
     deleteHabit(token, id).then((res) => {
       setRedirect(true);
     });
@@ -57,8 +56,6 @@ const SingleHabit = (props) => {
       <p>Spinner</p>
     );
   }
-
-  console.log(habit);
 
   return (
     redirect
@@ -81,14 +78,11 @@ const SingleHabit = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    error: getHabitsError(state),
-    habit: getHabit(state),
-    pending: getHabitsPending(state),
-  };
-};
+const mapStateToProps = (state) => ({
+  error: getHabitsError(state),
+  habit: getHabit(state),
+  pending: getHabitsPending(state),
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchSingleHabit: fetchSingleHabitAction,

@@ -1,8 +1,6 @@
 import { addHabitError, addHabitPending, addHabitSuccess } from '../redux/actions';
 
 const addHabit = (token, data) => async (dispatch) => {
-  console.log(data);
-  console.log(token);
   dispatch(addHabitPending());
   try {
     const first = await fetch('https://tracker-back-mcv.herokuapp.com/habits',

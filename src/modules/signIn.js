@@ -13,7 +13,6 @@ const signIn = (data) => async (dispatch) => {
         body: JSON.stringify(data),
       });
     const second = await first.json();
-    console.log(second.token);
     dispatch(signInSuccess(second.token));
     localStorage.setItem('email', data.email);
     localStorage.setItem('token', second.token);

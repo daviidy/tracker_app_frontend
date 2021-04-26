@@ -67,11 +67,8 @@ const UpdateMeasure = ({
     });
   };
 
-  console.log(singleMeasure);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(measure);
     updateMeasure(token, measure, habitId, measureId).then((res) => {
       setRedirect(true);
     });

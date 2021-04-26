@@ -62,11 +62,8 @@ const UpdateHabit = ({
     });
   };
 
-  console.log(singleHabit);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(habit);
     updateHabit(token, habit, id).then((res) => {
       setRedirect(true);
     });

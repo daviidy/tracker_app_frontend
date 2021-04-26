@@ -43,11 +43,8 @@ const Habits = ({
     } else {
       setRedirect(true);
     }
-    console.log('fetching habits');
     fetchHabits(token);
   }, []);
-
-  console.log(allHabits);
 
   const renderHabits = (arr) => (arr.map((val) => (
     <div key={val.id}>

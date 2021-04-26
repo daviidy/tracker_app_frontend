@@ -48,11 +48,8 @@ const Measures = ({
     } else {
       setRedirect(true);
     }
-    console.log('fetching measures');
     fetchMeasures(token, id);
   }, []);
-
-  console.log(allMeasures);
 
   const handleDelete = (e, habitId, measureId) => {
     e.preventDefault();

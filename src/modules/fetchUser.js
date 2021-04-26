@@ -14,7 +14,6 @@ const fetchUser = (data) => async (dispatch) => {
       });
     const second = await first.json();
     dispatch(fetchUserSuccess(second));
-    console.log(second);
     localStorage.setItem('id', second.id);
     localStorage.setItem('username', second.username);
     localStorage.setItem('email', second.email);

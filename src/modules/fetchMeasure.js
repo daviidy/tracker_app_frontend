@@ -3,7 +3,6 @@ import {
 } from '../redux/actions';
 
 const fetchMeasure = (token, id) => async (dispatch) => {
-  console.log(token);
   dispatch(fetchMeasurePending());
   try {
     const first = await fetch(`https://tracker-back-mcv.herokuapp.com/habits/${id}/measurements`,
@@ -17,7 +16,6 @@ const fetchMeasure = (token, id) => async (dispatch) => {
       });
     const second = await first.json();
     dispatch(fetchMeasureSuccess(second));
-    console.log(second);
     return second;
   } catch (error) {
     dispatch(fetchMeasureError(error));

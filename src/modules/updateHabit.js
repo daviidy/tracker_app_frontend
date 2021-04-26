@@ -3,9 +3,6 @@ import {
 } from '../redux/actions';
 
 const updateHabit = (token, data, id) => async (dispatch) => {
-  console.log(data);
-  console.log(token);
-  console.log(id);
   dispatch(updateHabitPending());
   try {
     const first = await fetch(`https://tracker-back-mcv.herokuapp.com/habits/${id}`,

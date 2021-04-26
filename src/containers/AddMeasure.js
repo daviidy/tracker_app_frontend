@@ -62,7 +62,6 @@ const AddMeasure = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(measure);
     addMeasure(token, measure, id).then((res) => {
       setRedirect(true);
     });

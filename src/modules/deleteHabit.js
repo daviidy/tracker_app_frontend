@@ -3,8 +3,6 @@ import {
 } from '../redux/actions';
 
 const deleteHabit = (token, data) => async (dispatch) => {
-  console.log(data);
-  console.log(token);
   dispatch(deleteHabitPending());
   try {
     const first = await fetch(`https://tracker-back-mcv.herokuapp.com/habits/${data}`,
