@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import fetchMeasureAction from '../modules/fetchMeasure';
 import fetchUserAction from '../modules/fetchUser';
+import deleteMeasureAction from '../modules/deleteMeasure';
 import {
   getMeasures,
   getMeasuresError,
@@ -29,6 +30,7 @@ const Measures = ({
   getUserPending,
   fetchUser,
   fetchMeasures,
+  deleteMeasure,
 
 }) => {
   const [redirect, setRedirect] = useState(false);
@@ -52,10 +54,17 @@ const Measures = ({
 
   console.log(allMeasures);
 
+  const handleDelete = (e, habitId, measureId) => {
+    e.preventDefault();
+    deleteMeasure(token, habitId, measureId).then((res) => {
+      setRedirect(true);
+    });
+  };
+
   const renderMeasures = (arr) => (arr.map((val) => (
     <div key={val.id}>
       <a href={`/measures/${val.id}`}>
-        <Measure measure={val} />
+        <Measure measure={val} habitId={id} handleDelete={handleDelete} />
       </a>
     </div>
   )));
@@ -90,6 +99,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchMeasures: fetchMeasureAction,
   fetchUser: fetchUserAction,
+  deleteMeasure: deleteMeasureAction,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Measures);
@@ -102,6 +112,7 @@ Measures.propTypes = {
   }).isRequired,
   fetchMeasures: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
+  deleteMeasure: PropTypes.func.isRequired,
   allMeasures: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
   })),

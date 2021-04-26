@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import fetchSingleHabitAction from '../modules/fetchSingleHabit';
-import updateHabitAction from '../modules/updateHabit';
+import fetchSingleMeasureAction from '../modules/fetchSingleMeasure';
+import updateMeasureAction from '../modules/updateMeasure';
 import fetchUserAction from '../modules/fetchUser';
 import {
-  getHabit,
-  getHabitsError,
-  getHabitsPending,
-} from '../redux/reducers/habitsReducer';
+  getMeasure,
+  getMeasuresError,
+  getMeasuresPending,
+} from '../redux/reducers/measuresReducer';
 
 import {
   getUser, getUserError, getUserPending,
@@ -19,11 +19,11 @@ import {
 
 import { checkToken, checkUser } from '../modules/checkAuth';
 
-const UpdateHabit = ({
+const UpdateMeasure = ({
   match: { params },
-  fetchSingleHabit,
-  updateHabit,
-  singleHabit,
+  fetchSingleMeasure,
+  updateMeasure,
+  singleMeasure,
   pending,
   error,
   getUser,
@@ -32,11 +32,15 @@ const UpdateHabit = ({
   fetchUser,
 
 }) => {
-  const [habit, setHabit] = useState({
-    name: '',
+  const [measure, setMeasure] = useState({
+    value: 0,
+    date: null,
+    user_id: 0,
   });
 
-  const { id } = params;
+  const { habitId } = params;
+
+  const { measureId } = params;
 
   const [redirect, setRedirect] = useState(false);
 
@@ -51,23 +55,24 @@ const UpdateHabit = ({
     } else {
       setRedirect(true);
     }
-    fetchSingleHabit(token, id);
+    fetchSingleMeasure(token, habitId, measureId);
   }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
-    setHabit({
-      ...habit,
+    setMeasure({
+      ...measure,
       [e.target.name]: e.target.value,
+      user_id: localStorage.getItem('id'),
     });
   };
 
-  console.log(singleHabit);
+  console.log(singleMeasure);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(habit);
-    updateHabit(token, habit, id).then((res) => {
+    console.log(measure);
+    updateMeasure(token, measure, habitId, measureId).then((res) => {
       setRedirect(true);
     });
   };
@@ -88,47 +93,54 @@ const UpdateHabit = ({
       ? <Redirect to="/users/sign_in" />
       : (
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">{singleHabit.name}</label>
+          <label htmlFor="value">{singleMeasure.value}</label>
           <input
             onChange={handleChange}
             required
             type="text"
             id="name"
-            name="name"
-            placeholder="Name"
+            name="value"
+            placeholder="Value"
           />
-          <button type="submit">Update Habit</button>
+          <input
+            onChange={handleChange}
+            required
+            type="date"
+            name="date"
+          />
+          <button type="submit">Update Measure</button>
         </form>
       )
   );
 };
 
 const mapStateToProps = (state) => ({
-  error: getHabitsError(state),
-  pending: getHabitsPending(state),
-  singleHabit: getHabit(state),
+  error: getMeasuresError(state),
+  pending: getMeasuresPending(state),
+  singleMeasure: getMeasure(state),
   getUser: getUser(state),
   getUserError: getUserError(state),
   getUserPending: getUserPending(state),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  updateHabit: updateHabitAction,
-  fetchSingleHabit: fetchSingleHabitAction,
+  updateMeasure: updateMeasureAction,
+  fetchSingleMeasure: fetchSingleMeasureAction,
   fetchUser: fetchUserAction,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateHabit);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateMeasure);
 
-UpdateHabit.propTypes = {
+UpdateMeasure.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
+      habitId: PropTypes.string,
+      measureId: PropTypes.string,
     }),
   }).isRequired,
-  updateHabit: PropTypes.func.isRequired,
+  updateMeasure: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  fetchSingleHabit: PropTypes.func.isRequired,
+  fetchSingleMeasure: PropTypes.func.isRequired,
   pending: PropTypes.bool,
   error: PropTypes.string,
   getUserPending: PropTypes.bool,
@@ -136,16 +148,16 @@ UpdateHabit.propTypes = {
   getUser: PropTypes.shape({
     username: PropTypes.string,
   }),
-  singleHabit: PropTypes.shape({
-    name: PropTypes.string,
+  singleMeasure: PropTypes.shape({
+    value: PropTypes.number,
   }),
 };
 
-UpdateHabit.defaultProps = {
+UpdateMeasure.defaultProps = {
   pending: true,
   error: null,
   getUserPending: true,
   getUserError: null,
   getUser: {},
-  singleHabit: {},
+  singleMeasure: {},
 };

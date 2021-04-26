@@ -9,6 +9,7 @@ import SingleHabit from './containers/SingleHabit';
 import UpdateHabit from './containers/UpdateHabit';
 import AddMeasure from './containers/AddMeasure';
 import Measurements from './containers/Measurements';
+import UpdateMeasure from './containers/UpdateMeasure';
 
 const Routes = () => (
   <BrowserRouter>
@@ -22,6 +23,7 @@ const Routes = () => (
       <Route exact path="/habits/:id/edit" component={UpdateHabit} />
       <Route exact path="/habits/:id/measurements/create" component={AddMeasure} />
       <Route exact path="/habits/:id/measurements" component={Measurements} />
+      <Route exact path="/habits/:habitId/measurements/:measureId" component={UpdateMeasure} />
     </Switch>
   </BrowserRouter>
 );
