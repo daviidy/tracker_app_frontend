@@ -1,9 +1,9 @@
-import { fetchHabitsError, fetchHabitsPending, fetchHabitsSuccess } from '../redux/actions';
+import { addHabitError, addHabitPending, addHabitSuccess } from '../redux/actions';
 
-const fetchHabits = (token, data) => async (dispatch) => {
+const addHabit = (token, data) => async (dispatch) => {
   console.log(data);
   console.log(token);
-  dispatch(fetchHabitsPending());
+  dispatch(addHabitPending());
   try {
     const first = await fetch('https://tracker-back-mcv.herokuapp.com/habits',
       {
@@ -16,12 +16,12 @@ const fetchHabits = (token, data) => async (dispatch) => {
         body: JSON.stringify(data),
       });
     const second = await first.json();
-    dispatch(fetchHabitsSuccess(second));
+    dispatch(addHabitSuccess(second));
     return second;
   } catch (error) {
-    dispatch(fetchHabitsError(error));
+    dispatch(addHabitError(error));
     return error;
   }
 };
 
-export default fetchHabits;
+export default addHabit;

@@ -20,7 +20,7 @@ import { checkToken, checkUser } from '../modules/checkAuth';
 import Habit from '../components/Habit';
 
 const Habits = ({
-  habits,
+  allHabits,
   pending,
   error,
   getUser,
@@ -30,10 +30,6 @@ const Habits = ({
   fetchHabits,
 
 }) => {
-  const [habit, setHabit] = useState({
-    name: '',
-  });
-
   const [redirect, setRedirect] = useState(false);
 
   let token = localStorage.getItem('token');
@@ -47,10 +43,11 @@ const Habits = ({
     } else {
       setRedirect(true);
     }
+    console.log('fetching habits');
     fetchHabits(token);
   }, []);
 
-  console.log(habits);
+  console.log(allHabits);
 
   const renderHabits = (arr) => (arr.map((val) => (
     <div key={val.id}>
@@ -74,12 +71,12 @@ const Habits = ({
   return (
     redirect
       ? <Redirect to="/users/sign_in" />
-      : renderHabits(habits)
+      : renderHabits(allHabits)
   );
 };
 
 const mapStateToProps = (state) => ({
-  habits: getHabits(state),
+  allHabits: getHabits(state),
   error: getHabitsError(state),
   pending: getHabitsPending(state),
   getUser: getUser(state),
@@ -97,7 +94,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Habits);
 Habits.propTypes = {
   fetchHabits: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  habits: PropTypes.arrayOf(PropTypes.shape({
+  allHabits: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
   })),
   pending: PropTypes.bool,
@@ -110,7 +107,7 @@ Habits.propTypes = {
 };
 
 Habits.defaultProps = {
-  habits: [],
+  allHabits: [],
   pending: true,
   error: null,
   getUserPending: true,
