@@ -25,6 +25,10 @@ You can find the demo [here](https://tracker-app-yao.herokuapp.com/)
 
 You can find the API docs [here](https://tracker-back-mcv.herokuapp.com/)
 
+## API repository
+
+You can find the API repo [here](https://github.com/daviidy/tracker_app_backend/tree/feature-branch)
+
 ## To run the project in local
 
 - make sure you have have NodeJS and NPM installed in your computer
