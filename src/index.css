@@ -1,13 +1,75 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/*
+    CSS Reset
+*/
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+input,
+button,
+ul,
+li,
+a,
+p {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  border: 0;
+  padding: 0;
+  text-align: inherit;
+  text-decoration: inherit;
+  color: inherit;
+  background: transparent;
+  list-style: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.blue-color {
+  color: #41B5E8;
+}
+
+.bg-blue-color {
+  background-color: #41B5E8;
+}
+
+.main-nav {
+  position: fixed;
+  bottom: 0;
+}
+
+.main-title {
+  font-size: 25px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-item i {
+  font-size: 20px;
+  color: #fff;
+}
+
+.menu-item a {
+  font-size: 10px;
+  font-weight: bold;
+  display: block;
+  color: #fff;
+}
+
+.menu-item {
+  width: 25%;
+}
+
+.content {
+  margin-top: 7rem;
+}
+
+.date {
+  font-size: 20px;
 }

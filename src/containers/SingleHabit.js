@@ -62,17 +62,36 @@ const SingleHabit = (props) => {
       ? <Redirect to="/users/sign_in" />
       : (
         <>
-          <p>
-            <strong>{ habit.name }</strong>
-          </p>
-          <a href={`/habits/${habit.id}/edit`}>Edit</a>
-          <br />
-          <button type="button" onClick={handleDelete}>Delete</button>
-          <br />
-          <a href={`/habits/${habit.id}/measurements/create`}>Add measure for this habit</a>
-          <br />
-          <a href={`/habits/${habit.id}/measurements`}>All measures for this habit</a>
-          <br />
+          <div className="row">
+            <div className="col-8">
+              <h4>
+                <strong>{ habit.name }</strong>
+              </h4>
+            </div>
+            <div className="col-4 d-flex justify-content-end text-dark">
+              {
+                localStorage.getItem('admin') === 'true'
+                  ? (
+                    <>
+                      <a href={`/habits/${habit.id}/edit`} className="mr-3">
+                        <i className="fas fa-pencil-alt" />
+                      </a>
+                      <button type="button" className="btn p-0" onClick={handleDelete}>
+                        <i className="fas fa-trash" />
+                      </button>
+                    </>
+                  )
+                  : null
+              }
+
+            </div>
+          </div>
+          <div className="mt-5 col-12 shadow p-3 mb-5 bg-white rounded">
+            <a href={`/habits/${habit.id}/measurements/create`}>Add measure for this habit</a>
+          </div>
+          <div className="col-12 shadow p-3 mb-5 bg-white rounded">
+            <a href={`/habits/${habit.id}/measurements`}>All measures for this habit</a>
+          </div>
         </>
       )
   );

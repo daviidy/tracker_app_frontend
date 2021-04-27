@@ -6,16 +6,22 @@ const Measure = ({ measure, habitId, handleDelete }) => {
   };
 
   return (
-    <>
-      <p>
-        {measure.value}
-      </p>
-      <a href={`/habits/${habitId}/measurements/${measure.id}`}>
-        Update
-      </a>
-      <br />
-      <button type="button" onClick={handleClick}>Delete</button>
-    </>
+    <div className="row">
+      <div className="col-8">
+        <p className="font-weight-bold date">{measure.date}</p>
+        <p>{measure.value}</p>
+      </div>
+      <div className="col-4 d-flex justify-content-end">
+        <button type="button">
+          <a className="mr-3" href={`/habits/${habitId}/measurements/${measure.id}`}>
+            <i className="fas fa-pencil-alt" />
+          </a>
+        </button>
+        <button type="button" onClick={handleClick}>
+          <i className="fas fa-trash" />
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -25,7 +31,8 @@ Measure.propTypes = {
   measure: PropTypes.shape({
     id: PropTypes.number,
     value: PropTypes.number,
+    date: PropTypes.string,
   }).isRequired,
-  habitId: PropTypes.number.isRequired,
+  habitId: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };

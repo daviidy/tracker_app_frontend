@@ -71,14 +71,23 @@ const SignUp = ({
 
   return (
     redirect
-      ? <Redirect to="/habits/" />
+      ? <Redirect to="/measures" />
       : (
         <form onSubmit={handleSubmit}>
-          <input onChange={handleChange} required type="text" name="username" placeholder="Username" />
-          <input onChange={handleChange} required type="email" name="email" placeholder="Email" />
-          <input onChange={handleChange} required type="password" name="password" placeholder="Password" />
-          <input onChange={handleChange} required type="password" name="passwordConfirmation" placeholder="Confirm password" />
-          <button type="submit">Sign Up</button>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="text" name="username" placeholder="Username" />
+          </div>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="email" name="email" placeholder="Email" />
+          </div>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="password" name="password" placeholder="Password" />
+          </div>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="password" name="passwordConfirmation" placeholder="Confirm password" />
+          </div>
+          <button className="btn bg-blue-color font-weight-bold text-white mb-3" type="submit">Sign Up</button>
+          <a href="/users/sign_in" className="d-block">Sign in</a>
         </form>
       )
   );

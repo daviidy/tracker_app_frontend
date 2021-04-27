@@ -77,8 +77,10 @@ const AddHabit = ({
       ? <Redirect to="/users/sign_in" />
       : (
         <form onSubmit={handleSubmit}>
-          <input onChange={handleChange} required type="text" name="name" placeholder="Name" />
-          <button type="submit">Create Habit</button>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="text" name="name" placeholder="Name" />
+          </div>
+          <button className="btn bg-blue-color text-white" type="submit">Create Habit</button>
         </form>
       )
   );

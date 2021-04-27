@@ -83,9 +83,13 @@ const AddMeasure = ({
       ? <Redirect to="/users/sign_in" />
       : (
         <form onSubmit={handleSubmit}>
-          <input onChange={handleChange} required type="text" name="value" placeholder="Value" />
-          <input onChange={handleChange} required type="date" name="date" />
-          <button type="submit">Create Measure</button>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="text" name="value" placeholder="Value" />
+          </div>
+          <div className="form-group">
+            <input className="form-control" onChange={handleChange} required type="date" name="date" />
+          </div>
+          <button className="btn bg-blue-color text-white" type="submit">Create Measure</button>
         </form>
       )
   );

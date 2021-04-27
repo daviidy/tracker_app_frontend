@@ -59,10 +59,8 @@ const Measures = ({
   };
 
   const renderMeasures = (arr) => (arr.map((val) => (
-    <div key={val.id}>
-      <a href={`/measures/${val.id}`}>
-        <Measure measure={val} habitId={id} handleDelete={handleDelete} />
-      </a>
+    <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
+      <Measure measure={val} habitId={id} handleDelete={handleDelete} />
     </div>
   )));
 
