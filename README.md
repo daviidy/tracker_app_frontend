@@ -81,6 +81,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 - LinkedIn: [@daviidy](https://www.linkedin.com/in/david-yao-6bb95299/)
 - Personal Website: [@daviidy](http://david-yao.com)
 
+## Acknowledgement
+
+I have followed the [design](https://www.behance.net/gallery/13271423/Bodytrackit-An-iOs-app-Branding-UX-and-UI) given by [Gregoire Vella](https://www.behance.net/gregoirevella) in Behance
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
