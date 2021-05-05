@@ -16,6 +16,7 @@ import {
 } from '../redux/reducers/usersReducer';
 
 import { checkToken, checkUser } from '../modules/checkAuth';
+import Spinner from '../components/Spinner';
 
 const AddMeasure = ({
   match: { params },
@@ -74,7 +75,7 @@ const AddMeasure = ({
 
   if (shouldShowSpinner()) {
     return (
-      <p>Spinner</p>
+      <Spinner />
     );
   }
 

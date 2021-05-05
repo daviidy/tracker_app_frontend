@@ -19,6 +19,7 @@ import {
 
 import { checkToken, checkUser } from '../modules/checkAuth';
 import Measure from '../components/Measure';
+import Spinner from '../components/Spinner';
 
 const Measures = ({
   match: { params },
@@ -48,7 +49,7 @@ const Measures = ({
     } else {
       setRedirect(true);
     }
-    fetchMeasures(token, id);
+    fetchMeasures(token);
   }, []);
 
   const handleDelete = (e, habitId, measureId) => {
@@ -58,7 +59,19 @@ const Measures = ({
     });
   };
 
-  const renderMeasures = (arr) => (arr.map((val) => (
+  const renderMeasuresToday = (arr) => (arr.map((val) => (
+    <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
+      <Measure measure={val} habitId={id} handleDelete={handleDelete} />
+    </div>
+  )));
+
+  const renderMeasuresYesterday = (arr) => (arr.map((val) => (
+    <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
+      <Measure measure={val} habitId={id} handleDelete={handleDelete} />
+    </div>
+  )));
+
+  const renderMeasuresLastWeek = (arr) => (arr.map((val) => (
     <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
       <Measure measure={val} habitId={id} handleDelete={handleDelete} />
     </div>
@@ -71,14 +84,23 @@ const Measures = ({
 
   if (shouldShowSpinner()) {
     return (
-      <p>Spinner</p>
+      <Spinner />
     );
   }
 
   return (
     redirect
       ? <Redirect to="/users/sign_in" />
-      : renderMeasures(allMeasures)
+      : (
+        <div className="row">
+          <h3 className="font-weight-bold">Today</h3>
+          { allMeasures[0] ? renderMeasuresToday(allMeasures[0]) : null}
+          <h3 className="font-weight-bold">Yesterday</h3>
+          { allMeasures[1] ? renderMeasuresYesterday(allMeasures[1]) : null}
+          <h3 className="font-weight-bold">Last week</h3>
+          { allMeasures[2] ? renderMeasuresLastWeek(allMeasures[2]) : null}
+        </div>
+      )
   );
 };
 

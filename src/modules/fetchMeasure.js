@@ -2,10 +2,10 @@ import {
   fetchMeasureError, fetchMeasurePending, fetchMeasureSuccess,
 } from '../redux/actions';
 
-const fetchMeasure = (token, id) => async (dispatch) => {
+const fetchMeasure = (token) => async (dispatch) => {
   dispatch(fetchMeasurePending());
   try {
-    const first = await fetch(`https://tracker-back-mcv.herokuapp.com/habits/${id}/measurements`,
+    const first = await fetch('https://tracker-back-mcv.herokuapp.com/measures',
       {
         headers: {
           'Content-Type': 'application/json',

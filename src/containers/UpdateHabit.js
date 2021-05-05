@@ -18,6 +18,7 @@ import {
 } from '../redux/reducers/usersReducer';
 
 import { checkToken, checkUser } from '../modules/checkAuth';
+import Spinner from '../components/Spinner';
 
 const UpdateHabit = ({
   match: { params },
@@ -76,7 +77,7 @@ const UpdateHabit = ({
 
   if (shouldShowSpinner()) {
     return (
-      <p>Spinner</p>
+      <Spinner />
     );
   }
 

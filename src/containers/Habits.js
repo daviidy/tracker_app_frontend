@@ -18,6 +18,7 @@ import {
 
 import { checkToken, checkUser } from '../modules/checkAuth';
 import Habit from '../components/Habit';
+import Spinner from '../components/Spinner';
 
 const Habits = ({
   allHabits,
@@ -48,27 +49,13 @@ const Habits = ({
     fetchHabits(token);
   }, []);
 
-  const renderHabits = (arr) => (arr.map((val) => {
-    if (pathname === '/measures') {
-      return (
-        <div className="d-flex justify-content-between col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
-          <a href={`/habits/${val.id}`} className="font-weight-bold">
-            <Habit habit={val} />
-          </a>
-          <a className="blue-color font-weight-bold" href={`/habits/${val.id}/measurements`}>
-            Track it!
-          </a>
-        </div>
-      );
-    }
-    return (
-      <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
-        <a href={`/habits/${val.id}`} className="font-weight-bold">
-          <Habit habit={val} />
-        </a>
-      </div>
-    );
-  }));
+  const renderHabits = (arr) => (arr.map((val) => (
+    <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
+      <a href={`/habits/${val.id}`} className="font-weight-bold">
+        <Habit habit={val} />
+      </a>
+    </div>
+  )));
 
   const shouldShowSpinner = () => {
     if (pending === false) return false;
@@ -77,7 +64,7 @@ const Habits = ({
 
   if (shouldShowSpinner()) {
     return (
-      <p>Spinner</p>
+      <Spinner />
     );
   }
 

@@ -15,7 +15,7 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Habits} />
-      <Route exact path="/measures" component={Habits} />
+      <Route exact path="/measures" component={Measurements} />
       <Route exact path="/progress" component={Habits} />
       <Route exact path="/habits/create" component={AddHabit} />
       <Route exact path="/users/sign_up" component={SignUp} />

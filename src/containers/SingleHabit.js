@@ -9,6 +9,7 @@ import { getHabit, getHabitsError, getHabitsPending } from '../redux/reducers/ha
 import { checkToken, checkUser } from '../modules/checkAuth';
 import fetchUserAction from '../modules/fetchUser';
 import deleteHabitAction from '../modules/deleteHabit';
+import Spinner from '../components/Spinner';
 
 const SingleHabit = (props) => {
   const {
@@ -53,7 +54,7 @@ const SingleHabit = (props) => {
 
   if (shouldShowSpinner()) {
     return (
-      <p>Spinner</p>
+      <Spinner />
     );
   }
 
