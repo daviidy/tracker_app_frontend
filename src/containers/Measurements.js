@@ -22,7 +22,6 @@ import Measure from '../components/Measure';
 import Spinner from '../components/Spinner';
 
 const Measures = ({
-  match: { params },
   allMeasures,
   pending,
   error,
@@ -35,8 +34,6 @@ const Measures = ({
 
 }) => {
   const [redirect, setRedirect] = useState(false);
-
-  const { id } = params;
 
   let token = localStorage.getItem('token');
 
@@ -61,19 +58,19 @@ const Measures = ({
 
   const renderMeasuresToday = (arr) => (arr.map((val) => (
     <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
-      <Measure measure={val} habitId={id} handleDelete={handleDelete} />
+      <Measure measure={val} habitId={val.habit_id} handleDelete={handleDelete} />
     </div>
   )));
 
   const renderMeasuresYesterday = (arr) => (arr.map((val) => (
     <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
-      <Measure measure={val} habitId={id} handleDelete={handleDelete} />
+      <Measure measure={val} habitId={val.habit_id} handleDelete={handleDelete} />
     </div>
   )));
 
   const renderMeasuresLastWeek = (arr) => (arr.map((val) => (
     <div className="col-12 shadow p-3 mb-5 bg-white rounded" key={val.id}>
-      <Measure measure={val} habitId={id} handleDelete={handleDelete} />
+      <Measure measure={val} habitId={val.habit_id} handleDelete={handleDelete} />
     </div>
   )));
 
@@ -130,9 +127,11 @@ Measures.propTypes = {
   fetchMeasures: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   deleteMeasure: PropTypes.func.isRequired,
-  allMeasures: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-  })),
+  allMeasures: PropTypes.arrayOf(PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  )),
   pending: PropTypes.bool,
   error: PropTypes.string,
   getUserPending: PropTypes.bool,
