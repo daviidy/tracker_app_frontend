@@ -4,10 +4,10 @@ const title = (pathname) => {
       return 'Choose what you want to measure';
 
     case '/measures':
-      return 'Choose a habit to see the measurements';
+      return 'Your measurements';
 
     case '/progress':
-      return 'Select a habit to see your progress';
+      return 'Your progress';
 
     case '/more':
       return 'More';
