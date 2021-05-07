@@ -129,7 +129,6 @@ const Progress = ({
     fetchMeasures(token);
     const timer = setTimeout(() => {
       canvas = document.querySelector('#chart');
-      console.log(canvas);
       new Chart(canvas, config);
     }, 500);
     return () => {
