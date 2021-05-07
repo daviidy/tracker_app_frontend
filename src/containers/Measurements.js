@@ -90,11 +90,17 @@ const Measures = ({
       ? <Redirect to="/users/sign_in" />
       : (
         <div className="row">
-          <h3 className="font-weight-bold">Today</h3>
+          <div className="col-12 mb-3 pl-0">
+            <h3 className="font-weight-bold">Today</h3>
+          </div>
           { allMeasures[0] ? renderMeasuresToday(allMeasures[0]) : null}
-          <h3 className="font-weight-bold">Yesterday</h3>
+          <div className="col-12 mb-3 pl-0">
+            <h3 className="font-weight-bold">Yesterday</h3>
+          </div>
           { allMeasures[1] ? renderMeasuresYesterday(allMeasures[1]) : null}
-          <h3 className="font-weight-bold">Last week</h3>
+          <div className="col-12 mb-3 pl-0">
+            <h3 className="font-weight-bold">Last week</h3>
+          </div>
           { allMeasures[2] ? renderMeasuresLastWeek(allMeasures[2]) : null}
         </div>
       )

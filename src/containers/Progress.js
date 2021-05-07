@@ -1,32 +1,6 @@
 /* eslint-disable no-new */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
-import {
-  Chart,
-  ArcElement,
-  LineElement,
-  BarElement,
-  PointElement,
-  BarController,
-  BubbleController,
-  DoughnutController,
-  LineController,
-  PieController,
-  PolarAreaController,
-  RadarController,
-  ScatterController,
-  CategoryScale,
-  LinearScale,
-  LogarithmicScale,
-  RadialLinearScale,
-  TimeScale,
-  TimeSeriesScale,
-  Decimation,
-  Filler,
-  Legend,
-  Title,
-  Tooltip,
-} from 'chart.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -47,9 +21,10 @@ import {
 import { checkToken, checkUser } from '../modules/checkAuth';
 import Measure from '../components/Measure';
 import Spinner from '../components/Spinner';
+import ProgressChart from '../components/ProgressChart';
 
 const Progress = ({
-  allProgress,
+  allMeasures,
   pending,
   error,
   getUser,
@@ -61,60 +36,9 @@ const Progress = ({
 
 }) => {
   const [redirect, setRedirect] = useState(false);
+  const [progress, setProgress] = useState(false);
 
   let token = localStorage.getItem('token');
-
-  let canvas = null;
-
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
-  const data = {
-    labels,
-    datasets: [{
-      label: 'My progress',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1,
-    }],
-  };
-  const config = {
-    type: 'line',
-    data,
-  };
-
-  Chart.register(
-    ArcElement,
-    LineElement,
-    BarElement,
-    PointElement,
-    BarController,
-    BubbleController,
-    DoughnutController,
-    LineController,
-    PieController,
-    PolarAreaController,
-    RadarController,
-    ScatterController,
-    CategoryScale,
-    LinearScale,
-    LogarithmicScale,
-    RadialLinearScale,
-    TimeScale,
-    TimeSeriesScale,
-    Decimation,
-    Filler,
-    Legend,
-    Title,
-    Tooltip,
-  );
 
   useEffect(() => {
     if (checkUser()) {
@@ -127,13 +51,6 @@ const Progress = ({
     }
 
     fetchMeasures(token);
-    const timer = setTimeout(() => {
-      canvas = document.querySelector('#chart');
-      new Chart(canvas, config);
-    }, 500);
-    return () => {
-      clearTimeout(timer);
-    };
   }, []);
 
   const handleDelete = (e, habitId, measureId) => {
@@ -143,32 +60,46 @@ const Progress = ({
     });
   };
 
-  //   const shouldShowSpinner = () => {
-  //     if (pending === false) return false;
-  //     return true;
-  //   };
+  const labels = [];
+  const results = [];
 
-  //   if (shouldShowSpinner()) {
-  //     return (
-  //       <Spinner />
-  //     );
-  //   }
+  allMeasures.forEach((measure) => {
+    measure.forEach((data) => {
+      labels.push(data.date);
+      results.push(data.value);
+    });
+  });
+
+  const renderChart = () => {
+    setProgress(true);
+  };
+
+  const shouldShowSpinner = () => {
+    if (pending === false) return false;
+    return true;
+  };
+
+  if (shouldShowSpinner()) {
+    return (
+      <Spinner />
+    );
+  }
+
+  if (progress === true) {
+    return (
+      <ProgressChart labels={labels} results={results} />
+    );
+  }
 
   return (
     redirect
       ? <Redirect to="/users/sign_in" />
-      : (
-        <div className="row">
-          <div className="col-12">
-            <canvas id="chart" />
-          </div>
-        </div>
-      )
+      : renderChart()
   );
 };
 
 const mapStateToProps = (state) => ({
-  allProgress: getMeasures(state),
+  allMeasures: getMeasures(state),
   error: getMeasuresError(state),
   pending: getMeasuresPending(state),
   getUser: getUser(state),
@@ -193,7 +124,7 @@ Progress.propTypes = {
   fetchMeasures: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   deleteMeasure: PropTypes.func.isRequired,
-  allProgress: PropTypes.arrayOf(PropTypes.arrayOf(
+  allMeasures: PropTypes.arrayOf(PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
     }),
@@ -208,7 +139,7 @@ Progress.propTypes = {
 };
 
 Progress.defaultProps = {
-  allProgress: [],
+  allMeasures: [],
   pending: true,
   error: null,
   getUserPending: true,
